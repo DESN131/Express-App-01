@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #212121;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .user-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 600px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    .user-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .user-card {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .user-card p {
+      margin: 5px 0;
+    }
+
+    .back-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="user-container">
+    <h2>User List</h2>
+    <% users.forEach(user => { %>
+      <div class="user-card">
+        <p><strong>Name:</strong> <%= user.name %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>Created At:</strong> <%= user.createdAt.toDateString() %></p>
+        <p><strong>Password:</strong> <%= user.password %></p>
+        <p><strong>Hashed Password:</strong> <%= user.hashedPassword %></p>
+      </div>
+    <% }) %>
+    <button class="back-btn" onclick="history.back()">Back</button>
+  </div>
+</body>
+</html>

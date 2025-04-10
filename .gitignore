@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# dotenv 环境变量文件
+.env
+.env.*.local
+
+# Logs
+logs
+*.log
+*.log.*
+log/
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# OS 相关文件
+.DS_Store
+Thumbs.db
+
+# Editor/IDE 配置
+.vscode/
+.idea/
+
+# 构建输出
+dist/
+build/
+tmp/
+temp/
+.cache/
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
+
+# Jest 测试覆盖率
+coverage/
+
+# 本地配置文件
+*.local
