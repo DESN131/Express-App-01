@@ -38,17 +38,21 @@ const createUser = async (req, res, next) => {
     }
 };
 const login = async (req, res, next) => {
-    const { name, email, password } = req.body;
+    const { name, password } = req.body;
     try {
-        const user = await User.findOne({ name });
+        const user = await User.findOne({
+            $or: [{ name }, { email: name }]
+          });
+        
         if (!user) return res.status(400).json({ message: 'User not found' });
 
         const isMatch = await bcrypt.compare(password, user.hashedPassword);
         if (!isMatch) return res.status(400).json({ message: 'Invalid password' });
+
         console.log('User login.');
         
-        res.status(200).json({message: 'Login successful', name: name, email: email});
-    } catch (error) {
+        res.status(200).json({message: 'Login successful', name: name});
+    } catch (err) {
         next(err);
     }
 };
