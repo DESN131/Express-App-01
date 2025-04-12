@@ -12,6 +12,9 @@ router.get('/register', controller.showregisterpage);
 router.get('/login', controller.showloginpage);
 router.post('/login', controller.login);
 
+router.get('/resetpassword', controller.showresetpage);
+router.post('/resetpassword', controller.resetpassword);
+
 router.get('/download', controller.download);
 router.get('/video', controller.video);
 

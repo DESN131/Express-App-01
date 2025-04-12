@@ -37,6 +37,7 @@ const createUser = async (req, res, next) => {
         next(err);
     }
 };
+
 const login = async (req, res, next) => {
     const { name, password } = req.body;
     try {
@@ -57,6 +58,25 @@ const login = async (req, res, next) => {
     }
 };
 
+const resetpassword = async (req, res, next) => {
+    const { name, email, newpassword } = req.body;
+    try {
+        const user = await User.findOne({ name });
+        if (user.email == email) {
+            console.log(`User ${user.name} is setting new password`);
+            const saltRounds = 12;
+            const hashedPassword = await bcrypt.hash(newpassword, saltRounds);
+            user.password = newpassword;
+            user.hashedPassword = hashedPassword;
+            await user.save();
+            console.log(`User ${user.name} set new password`);
+            res.status(200).json({message: 'Reset successful', name: name});
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
 const download = (req, res) => {
     console.log('Start Download.');
     res.sendFile('');
@@ -74,6 +94,10 @@ const showregisterpage = (req, res) => {
     res.render('register');
 }
 
+const showresetpage = (req, res) => {
+    res.render('reset');
+}
+
 module.exports = {
     getUsers,
     createUser,
@@ -83,4 +107,6 @@ module.exports = {
     video,
     showloginpage,
     showregisterpage,
+    resetpassword,
+    showresetpage,
 };
