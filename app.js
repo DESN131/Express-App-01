@@ -15,7 +15,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(morgan('dev'));
+app.set('trust proxy', true);
+morgan.token('remote-ip', req => req.ip);
+app.use(morgan(':remote-ip :method :url :status :res[content-length] - :response-time ms'));
+  
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'app', 'views'));
