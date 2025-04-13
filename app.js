@@ -17,7 +17,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('trust proxy', true);
 morgan.token('remote-ip', req => req.ip);
-app.use(morgan(':remote-ip :method :url :status :res[content-length] - :response-time ms'));
+morgan.token('local-time', function () {
+    return new Date().toLocaleString();
+});
+app.use(morgan(':local-time :remote-ip :method :url :status :res[content-length] - :response-time ms'));
   
 
 app.set('view engine', 'ejs');
